@@ -1,0 +1,38 @@
+app = "acca0c6c-ids"
+primary_region = "iad"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+  dockerfile = "Dockerfile.ids.identity.hstai"
+
+[env]
+  ASPNETCORE_ENVIRONMENT = "Production"
+  ConnectionStrings__DefaultConnection = "Data Source=128.110.10.31;Initial Catalog=acca0c6cids;User ID=sa;Password=jZAueoXbeUadhfbh3GaxY"
+  ConnectionStrings__ConfigurationDbConnection = "Data Source=128.110.10.31;Initial Catalog=acca0c6cids;User ID=sa;Password=jZAueoXbeUadhfbh3GaxY"
+  ConnectionStrings__PersistedGrantDbConnection = "Data Source=128.110.10.31;Initial Catalog=acca0c6cids;User ID=sa;Password=jZAueoXbeUadhfbh3GaxY"
+  IdentitySettings__Authority = "https://acca0c6c-ids.fly.dev/"
+  IdentitySettings__SelfUrl = "https://acca0c6c-ids.fly.dev/"
+  IdentitySettings__ApiUrl = "https://acca0c6c-host.fly.dev/"
+  SeedData__AllowedCorsOrigins__0 = "https://acca0c6c-web.fly.dev"
+  SeedData__AllowedCorsOrigins__1 = "https://acca0c6c-host.fly.dev"
+  SeedData__RedirectUris__0 = "https://acca0c6c-web.fly.dev/authentication/login-callback"
+  SeedData__PostLogoutRedirectUris__0 = "https://acca0c6c-web.fly.dev/"
+  SeedData__ClientUrls__0 = "https://acca0c6c-web.fly.dev"
+  SeedData__AdminEmail = "admin@kingsinns.ie"
+  SeedData__AdminPassword = "Pass123$"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm.cpu_kind]]
+  count = 1
+  kind = "shared"
+
+[[vm.memory]]
+  size_mb = 1024
